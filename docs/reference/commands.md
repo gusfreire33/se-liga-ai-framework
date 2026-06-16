@@ -1,6 +1,6 @@
 # Comandos
 
-17 comandos, agrupados por etapa do ciclo. Notação `/sl.x` (Claude/Codex); em Grok e
+18 comandos, agrupados por etapa do ciclo. Notação `/sl.x` (Claude/Codex); em Grok e
 Antigravity, cada comando é exposto como a skill `sl-x`.
 
 ## Gateway
@@ -29,6 +29,12 @@ Antigravity, cada comando é exposto como a skill `sl-x`.
 |---------|-----------|
 | **`/sl.build`** | Executa a implementação coordenando subagentes (Backend, Frontend, Database). Não faz commit sozinho. |
 | **`/sl.autopilot`** | Coordenador autônomo: roda planejamento → desenvolvimento → revisão sem interação. |
+
+## Dados (Banco)
+
+| Comando | O que faz |
+|---------|-----------|
+| **`/sl.db`** | Engenharia de dados (PostgreSQL/Supabase): schema, migrations com rollback, RLS policies, otimização de query e operações. Dispatcha o agente **`data-engineer`**. Modos: `schema`, `migration`, `rls`, `optimize`, `audit`, `run-sql`, `setup`. |
 
 ## Qualidade
 

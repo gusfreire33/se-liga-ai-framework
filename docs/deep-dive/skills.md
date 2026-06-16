@@ -1,6 +1,6 @@
 # Skills
 
-32 módulos de conhecimento de domínio. Skills **carregam sozinhas** por relevância
+33 módulos de conhecimento de domínio. Skills **carregam sozinhas** por relevância
 semântica (o campo `description` é o gatilho) e também são acionáveis diretamente.
 `SKILL.md` é um padrão **cross-agent** — o mesmo arquivo roda em todos os CLIs.
 
@@ -39,7 +39,8 @@ semântica (o campo `description` é o gatilho) e também são acionáveis diret
 |-------|----------------|
 | `sl-backend-development` | API backend: Clean Architecture, SOLID, DTOs, Services, Repositories. |
 | `sl-frontend-development` | Front: estado, data fetching, componentes, forms, routing. |
-| `sl-database-development` | Entidades, repositórios, migrations, multi-tenancy. |
+| `sl-database-development` | Entidades, repositórios, migrations, multi-tenancy (camada app/ORM). |
+| `sl-data-engineering` | **Camada DBA/SQL:** PostgreSQL & Supabase, RLS, migrations com rollback, EXPLAIN, índices, templates SQL. Usada pelo agente `data-engineer` / `/sl.db`. |
 | `sl-stripe` | Stripe: billing, assinaturas, versionamento de preços, grandfathering. |
 | `sl-ux-design` | UI/UX para SaaS: Leis de UX, DQS, padrões + tokens `DESIGN.md` por marca. |
 

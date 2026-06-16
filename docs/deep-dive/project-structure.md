@@ -3,11 +3,11 @@
 ## O pacote do framework
 
 ```
-.claude/          Claude Code — commands(17) · skills(32) · agents(9)
-.codex/           Codex       — skills(32) · prompts(17)
-.grok/            Grok Build  — skills(49 = 32 + 17 comandos-skill)
-.agent/           Antigravity CLI — skills(49)
-.agents/          Antigravity UI  — skills(49)
+.claude/          Claude Code — commands(18) · skills(33) · agents(10)
+.codex/           Codex       — skills(33) · prompts(18)
+.grok/            Grok Build  — skills(51 = 33 + 18 comandos-skill)
+.agent/           Antigravity CLI — skills(51)
+.agents/          Antigravity UI  — skills(51)
 .codesl/          Runtime compartilhado (o "motor")
 AGENTS.md         Instruções globais (Codex/Grok/Antigravity)
 bin/cli.js        Instalador npx
