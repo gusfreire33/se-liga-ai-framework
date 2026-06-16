@@ -20,3 +20,11 @@ docs/features/
 
 # npm pack
 *.tgz
+
+# VitePress / docs
+docs/node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# CI opcional (precisa de escopo workflow no token)
+.github/workflows/docs.yml
