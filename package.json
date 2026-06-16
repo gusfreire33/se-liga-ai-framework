@@ -1,0 +1,25 @@
+{
+  "name": "se-liga-ai-framework",
+  "version": "0.4.0",
+  "description": "Se Liga AI — FRAMEWORK (método sl): comandos + skills + runtime para Claude Code, Codex, Grok e Antigravity. Instalador npx cross-platform. (Não é o app/sistema nem a página Se Liga AI.)",
+  "bin": {
+    "se-liga-ai-framework": "bin/cli.js",
+    "sl-framework": "bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    ".claude/",
+    ".codex/",
+    ".grok/",
+    ".agent/",
+    ".agents/",
+    ".codesl/",
+    "AGENTS.md",
+    "README.md"
+  ],
+  "engines": { "node": ">=16.7" },
+  "keywords": ["ai", "agents", "claude-code", "codex", "grok", "antigravity", "skills", "framework", "se-liga-ai"],
+  "repository": { "type": "git", "url": "https://github.com/gusfreire33/se-liga-ai-framework.git" },
+  "author": "gusfreire33",
+  "license": "MIT"
+}

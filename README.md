@@ -50,34 +50,44 @@ Antigravity sem mudar nada. O que difere é **onde** ficam e **como os comandos*
 > Em Grok/Antigravity cada comando vira uma **skill** (ex.: comando `/sl.plan` → skill
 > `sl-plan`), porque esses CLIs usam skills como mecanismo de slash command.
 
-## Instalação rápida (uma linha)
+## Instalação (uma linha, via `npx`)
 
-> Repo: **[gusfreire33/se-liga-ai-framework](https://github.com/gusfreire33/se-liga-ai-framework)**.
-> O instalador detecta os CLIs presentes e instala em todos (skills/comandos/runtime).
+> Pré-requisito: **Node.js ≥ 16**. O `npx` é cross-platform — **uma única linha** serve
+> para Windows, macOS (Intel/Apple Silicon) e Linux (o Node cuida da diferença de SO).
 
-**Windows (PowerShell):**
+```bash
+npx se-liga-ai-framework
+```
+
+> Enquanto não publicado no npm, instale direto do GitHub (já funciona):
+> ```bash
+> npx github:gusfreire33/se-liga-ai-framework
+> ```
+
+Isso instala **global** na sua máquina (skills/comandos em `~/.claude`, `~/.codex`,
+`~/.grok`, `~/.gemini/config/skills`, `~/.agents` + runtime em `~/.codesl`), ficando
+disponível em qualquer projeto. Depois, **dentro de cada projeto** que for usar os comandos:
+
+```bash
+npx se-liga-ai-framework init      # cria .codesl/ no projeto
+```
+
+> Por que o `init`? Os comandos referenciam `.codesl/scripts/` por caminho **relativo ao
+> projeto**, então cada repo precisa do runtime local (um comando, instantâneo).
+
+**Opções:** `--project` instala TUDO na pasta atual (sem global) · `--cli claude,codex`
+limita os CLIs. Ex.: `npx se-liga-ai-framework --project --cli claude`.
+
+### Alternativa: scripts shell (sem Node)
+
 ```powershell
+# Windows (PowerShell)
 irm https://raw.githubusercontent.com/gusfreire33/se-liga-ai-framework/main/install.ps1 | iex
 ```
-
-**macOS (Apple Silicon — M1/M2/M3/M4):**
 ```bash
+# macOS (Intel/Apple Silicon) e Linux
 curl -fsSL https://raw.githubusercontent.com/gusfreire33/se-liga-ai-framework/main/install.sh | bash
 ```
-
-**macOS (Intel):**
-```bash
-curl -fsSL https://raw.githubusercontent.com/gusfreire33/se-liga-ai-framework/main/install.sh | bash
-```
-
-> As duas linhas de macOS são idênticas **de propósito**: o instalador só copia
-> arquivos (markdown + scripts shell), sem binários compilados — então funciona igual
-> em Intel e Apple Silicon (e em Linux). A mesma linha serve para os três.
-
-**Opções:** `--project` instala na pasta atual · `--global` (padrão) nos diretórios home
-· `--cli "claude,codex"` limita os CLIs. (No Windows: `-Project`, `-Global`, `-Cli`.)
-Para instalar a partir de uma cópia local sem baixar nada:
-`SL_SOURCE=/caminho ./install.sh --project` (PS: `-Source`).
 
 ---
 

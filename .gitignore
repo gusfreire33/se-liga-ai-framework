@@ -17,3 +17,6 @@ dist/
 # (não fazem parte do framework distribuído)
 docs/features/
 *.log
+
+# npm pack
+*.tgz
