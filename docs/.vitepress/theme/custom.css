@@ -1,0 +1,54 @@
+/* ===========================================================================
+   Se Liga AI — paleta de marca (base: Nexo Vital Saúde)
+   Primária #076E66 · clara #0a8a80 · escura #055a53
+   Secundária #5FB3A2 · acento ciano #00b4d8
+   =========================================================================== */
+
+:root {
+  /* Marca (links, ícones, destaques) */
+  --vp-c-brand-1: #0a8a80;
+  --vp-c-brand-2: #076e66;
+  --vp-c-brand-3: #055a53;
+  --vp-c-brand-soft: rgba(10, 138, 128, 0.14);
+
+  /* compat. com nomes legados */
+  --vp-c-brand: var(--vp-c-brand-1);
+  --vp-c-brand-light: #0a8a80;
+  --vp-c-brand-lighter: #5fb3a2;
+  --vp-c-brand-dark: #055a53;
+
+  /* Botões */
+  --vp-button-brand-bg: #076e66;
+  --vp-button-brand-hover-bg: #0a8a80;
+  --vp-button-brand-active-bg: #055a53;
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-hover-text: #ffffff;
+
+  /* Hero — nome com gradiente teal → ciano */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #5fb3a2 28%, #00b4d8);
+  --vp-home-hero-image-background-image: linear-gradient(45deg, #076e66 40%, #00b4d8);
+  --vp-home-hero-image-filter: blur(56px);
+}
+
+/* Modo escuro — teal mais claro para contraste */
+.dark {
+  --vp-c-brand-1: #5fb3a2;
+  --vp-c-brand-2: #7fc4b7;
+  --vp-c-brand-3: #0a8a80;
+  --vp-c-brand-soft: rgba(95, 179, 162, 0.16);
+
+  --vp-button-brand-bg: #0a8a80;
+  --vp-button-brand-hover-bg: #5fb3a2;
+  --vp-button-brand-active-bg: #076e66;
+  --vp-button-brand-text: #06231f;
+  --vp-button-brand-hover-text: #06231f;
+}
+
+/* Realce sutil de marca em blocos de destaque (tips) */
+.vp-doc .custom-block.tip {
+  border-color: var(--vp-c-brand-1);
+}

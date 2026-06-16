@@ -10,7 +10,7 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
   head: [
-    ['meta', { name: 'theme-color', content: '#cc785c' }],
+    ['meta', { name: 'theme-color', content: '#076e66' }],
     ['meta', { property: 'og:title', content: 'Se Liga AI — Framework' }],
     ['meta', { property: 'og:description', content: 'Método sl: comandos + skills + runtime multi-CLI.' }],
   ],
