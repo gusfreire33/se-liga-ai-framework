@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.idea/
+*.swp
+*~
+
+# Dependências / build (caso alguém rode algo dentro do repo)
+node_modules/
+dist/
+.cache/
+
+# Artefatos de runtime gerados em projetos que USAM o método
+# (não fazem parte do framework distribuído)
+docs/features/
+*.log
