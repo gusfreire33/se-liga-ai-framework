@@ -4,7 +4,9 @@ export default defineConfig({
   lang: 'pt-BR',
   title: 'Se Liga AI',
   description: 'Framework spec-driven para assistentes de código com IA — comandos, skills e runtime para Claude Code, Codex, Grok e Antigravity.',
-  base: '/se-liga-ai-framework/',
+  // Vercel serve na raiz; GitHub Pages serve em /se-liga-ai-framework/.
+  // DOCS_BASE permite override manual no build local.
+  base: process.env.VERCEL ? '/' : (process.env.DOCS_BASE || '/se-liga-ai-framework/'),
   cleanUrls: true,
   lastUpdated: true,
   head: [
