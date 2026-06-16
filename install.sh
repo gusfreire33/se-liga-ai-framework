@@ -31,9 +31,10 @@ while [ $# -gt 0 ]; do
 done
 
 c_grn='\033[0;32m'; c_blu='\033[0;34m'; c_yel='\033[1;33m'; c_red='\033[0;31m'; c_off='\033[0m'
-say()  { printf "${c_blu}»${c_off} %s\n" "$1"; }
-ok()   { printf "${c_grn}✓${c_off} %s\n" "$1"; }
-warn() { printf "${c_yel}!${c_off} %s\n" "$1"; }
+# todas as mensagens vão para stderr — assim não contaminam $(resolve_source)
+say()  { printf "${c_blu}»${c_off} %s\n" "$1" >&2; }
+ok()   { printf "${c_grn}✓${c_off} %s\n" "$1" >&2; }
+warn() { printf "${c_yel}!${c_off} %s\n" "$1" >&2; }
 die()  { printf "${c_red}✗ %s${c_off}\n" "$1" >&2; exit 1; }
 
 # ---- detectar OS/arch (informativo) ----
