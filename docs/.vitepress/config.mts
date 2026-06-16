@@ -43,6 +43,7 @@ export default defineConfig({
           { text: 'Comandos', link: '/reference/commands' },
           { text: 'Fluxos', link: '/reference/flows' },
           { text: 'Cenários', link: '/reference/scenarios' },
+          { text: 'Exemplo: /sl.db (RLS)', link: '/reference/example-data-engineer' },
         ],
       },
       {
