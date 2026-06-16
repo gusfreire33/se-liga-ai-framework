@@ -3,10 +3,10 @@
 /*
  * Se Liga AI (sl) — Instalador npx (cross-platform: Windows / macOS / Linux)
  *
- *   npx se-liga-ai-framework            instala GLOBAL (skills/comandos em ~/.<cli> + runtime em ~/.codesl)
- *   npx se-liga-ai-framework init       scaffolda .codesl/ no projeto atual (necessário p/ os comandos rodarem)
+ *   npx se-liga-ai install      instala GLOBAL (skills/comandos em ~/.<cli> + runtime em ~/.codesl)
+ *   npx se-liga-ai init         scaffolda .codesl/ no projeto atual (necessário p/ os comandos rodarem)
  *
- * Flags:
+ * Flags (no install):
  *   --project        instala TUDO na pasta atual (em vez de global)
  *   --cli a,b        limita aos CLIs: claude,codex,grok,antigravity (padrão: todos)
  */
@@ -56,7 +56,16 @@ if (cmd === 'init') {
   process.exit(0);
 }
 
-// =====================  install  =====================
+// comando desconhecido -> ajuda (não instala nada por engano)
+if (cmd && cmd !== 'install') {
+  console.log(`Se Liga AI — uso:
+  npx se-liga-ai install [--project] [--cli claude,codex,grok,antigravity]
+  npx se-liga-ai init        (dentro de um projeto: cria .codesl/)
+`);
+  process.exit(cmd === 'help' || cmd === '--help' ? 0 : 2);
+}
+
+// =====================  install (cmd === 'install' ou sem subcomando)  =====================
 say(`Se Liga AI — instalando | escopo: ${scope} | CLIs: ${CLIS.join(',')}`);
 const base = scope === 'project' ? CWD : HOME;
 let installed = 0;
@@ -105,7 +114,7 @@ ok(`Runtime → ${rt}`);
 console.log('');
 ok('Instalação concluída!');
 if (scope === 'global') {
-  warn('Para um projeto usar os comandos, rode dentro dele:  npx se-liga-ai-framework init');
+  warn('Para um projeto usar os comandos, rode dentro dele:  npx se-liga-ai init');
   say('(os comandos referenciam .codesl/scripts/ por caminho relativo ao projeto)');
 }
 say("Comece pelo gateway:  /sl  (Claude/Codex)  ·  skill 'sl'  (Grok/Antigravity)");

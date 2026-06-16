@@ -56,12 +56,12 @@ Antigravity sem mudar nada. O que difere é **onde** ficam e **como os comandos*
 > para Windows, macOS (Intel/Apple Silicon) e Linux (o Node cuida da diferença de SO).
 
 ```bash
-npx se-liga-ai-framework
+npx se-liga-ai install
 ```
 
 > Enquanto não publicado no npm, instale direto do GitHub (já funciona):
 > ```bash
-> npx github:gusfreire33/se-liga-ai-framework
+> npx github:gusfreire33/se-liga-ai-framework install
 > ```
 
 Isso instala **global** na sua máquina (skills/comandos em `~/.claude`, `~/.codex`,
@@ -69,14 +69,14 @@ Isso instala **global** na sua máquina (skills/comandos em `~/.claude`, `~/.cod
 disponível em qualquer projeto. Depois, **dentro de cada projeto** que for usar os comandos:
 
 ```bash
-npx se-liga-ai-framework init      # cria .codesl/ no projeto
+npx se-liga-ai init      # cria .codesl/ no projeto
 ```
 
 > Por que o `init`? Os comandos referenciam `.codesl/scripts/` por caminho **relativo ao
 > projeto**, então cada repo precisa do runtime local (um comando, instantâneo).
 
 **Opções:** `--project` instala TUDO na pasta atual (sem global) · `--cli claude,codex`
-limita os CLIs. Ex.: `npx se-liga-ai-framework --project --cli claude`.
+limita os CLIs. Ex.: `npx se-liga-ai install --project --cli claude`.
 
 ### Alternativa: scripts shell (sem Node)
 

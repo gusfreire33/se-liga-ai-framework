@@ -1,10 +1,10 @@
 {
-  "name": "se-liga-ai-framework",
+  "name": "se-liga-ai",
   "version": "0.4.0",
-  "description": "Se Liga AI — FRAMEWORK (método sl): comandos + skills + runtime para Claude Code, Codex, Grok e Antigravity. Instalador npx cross-platform. (Não é o app/sistema nem a página Se Liga AI.)",
+  "description": "Se Liga AI — FRAMEWORK (método sl): comandos + skills + runtime para Claude Code, Codex, Grok e Antigravity. Instalador npx cross-platform: `npx se-liga-ai install`. (Não é o app/sistema nem a página Se Liga AI.)",
   "bin": {
-    "se-liga-ai-framework": "bin/cli.js",
-    "sl-framework": "bin/cli.js"
+    "se-liga-ai": "bin/cli.js",
+    "sl": "bin/cli.js"
   },
   "files": [
     "bin/",
