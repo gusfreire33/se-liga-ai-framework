@@ -20,6 +20,7 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl.autopilot | Autonomous Feature Coordinator | sl-backend-development, sl-database-development, sl-frontend-development, sl-ux-design, sl-tasks-checklist |
 | sl.brainstorm | Explore ideas (READ-ONLY) | sl-doc-schemas, sl-ecosystem |
 | sl.build | Development Execution Specialist | sl-backend-development, sl-database-development, sl-frontend-development, sl-ux-design, sl-code-review, sl-ecosystem, sl-id-convention, sl-tasks-checklist |
+| sl.db | Data Engineer (SQL/DBA layer): physical schema design, safe migrations with rollback, RLS policies, query optimization, DB audit. Dispatches the data-engineer agent | sl-data-engineering, sl-database-development, sl-ecosystem |
 | sl.design | Mobile-first UX specification, coordinates subagents for complex features | sl-ux-design, sl-doc-schemas |
 | sl.diagnose | Pre-decision investigative triage for ambiguous symptoms. Applies 5-phase methodology (disambiguation, RCA, patterns, differential diagnosis, synthesis) and recommends route (hotfix/feature/extend/no-action). READ-ONLY | sl-investigation, sl-ecosystem |
 | sl.dispatch | Parallel execution engine: decompose a plan/feature into atomic tasks, order into DAG waves, route each to the cheapest sufficient model, run across subagents with veto gates | sl-parallel-dispatch, sl-veto-conditions, sl-subagent-driven-development, sl-ecosystem |
@@ -46,6 +47,7 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl-code-review | Code review: IoC, RESTful, Contracts, Security (OWASP), Clean Architecture, SOLID |
 | sl-commit | Knowledge reference for mid-workflow commits: adaptive message logic, type detection, staging rules |
 | sl-continuous-improvement | Kaizen: pattern extraction (5 gates), Ebbinghaus forgetting curve, defensible evidence-backed recommendations (max 5). Powers /sl.kaizen + kaizen agent |
+| sl-data-engineering | DBA/SQL layer: physical schema, safe migrations (with rollback), RLS policies, query optimization (EXPLAIN), indexing. Powers /sl.db + data-engineer agent. Complements sl-database-development (app/ORM) |
 | sl-database-development | Data architecture: entities, repositories, migrations, naming — stack-agnostic |
 | sl-delivery-validation | Product validation: Requirements 100% implemented, prerequisites exist, acceptance criteria pass |
 | sl-health-score | Reproducible 0-100 scoring: explicit weighted dimensions + severity penalties + Solid/Emerging/Ad-hoc. Used by sl.audit, sl.xray, sl.health-check, /sl.kaizen |
@@ -82,6 +84,7 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl-backend-development | sl.build, sl.autopilot, sl.plan, sl.review, sl.test |
 | sl-frontend-development | sl.build, sl.autopilot, sl.plan, sl.review, sl.test |
 | sl-database-development | sl.build, sl.autopilot, sl.plan, sl.review, sl.test |
+| sl-data-engineering | sl.db (schema design, migrations, RLS, query optimization, DB audit) |
 | sl-ux-design | sl.design, sl.ux, sl.build, sl.autopilot, sl.review, sl.hotfix, sl.plan |
 | sl-code-review | sl.review, sl.build |
 | sl-veto-conditions | sl.review, sl.done, sl.dispatch, sl-delivery-validation (gate enforcement) |
@@ -110,6 +113,7 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | Exploration | brainstorm → new → ... | Don't know where to start |
 | Triage | diagnose → (hotfix OR new OR no-action) | Vague symptom, unsure if bug/feature |
 | New Project | init → build → done | Create new project/feature |
+| With database | new → plan → db → build → review → done | Feature with new schema, RLS or migrations |
 | Parallel build | plan → dispatch → review → done | Many independent tasks, want parallelism + model routing |
 | Analysis | xray / audit / kaizen report | Check project health |
 | Improvement | kaizen reflect / kaizen report | Persist learnings; get evidence-backed recommendations |
@@ -134,9 +138,12 @@ Conditions evaluated top-to-bottom — use FIRST match.
 | sl.new | feature is simple (1-2 files) | `/sl.build` | Skip planning, build directly |
 | sl.new | user wants zero interaction | `/sl.autopilot` | Autonomous end-to-end |
 | sl.design | always | `/sl.plan` or `/sl.build` | UX spec done, plan or implement |
+| sl.plan | feature needs DB work (new schema, RLS, migration) | `/sl.db schema` | Design the physical schema/RLS before building against it |
 | sl.plan | default | `/sl.build` | Most common path |
 | sl.plan | many independent tasks, want parallelism + cost routing | `/sl.dispatch` | Fan out plan across subagents in DAG waves |
 | sl.plan | user wants zero interaction | `/sl.autopilot` | Autonomous implementation |
+| sl.db | schema/migration ready | `/sl.build` | Schema designed — implement against it |
+| sl.db | was a schema audit (DB-AUDIT findings) | `/sl.new` per issue | Turn DB findings into features |
 | sl.dispatch | waves executed | `/sl.review` | Code review before merge |
 | sl.dispatch | execution had escalations/surprises | `/sl.kaizen reflect` | Capture durable learnings |
 | sl.build | mode=DEVELOPMENT, wants tests | `/sl.test` | Validate with automated tests |
@@ -159,8 +166,10 @@ Conditions evaluated top-to-bottom — use FIRST match.
 | sl.done | feature/epic had non-obvious learnings | `/sl.kaizen reflect` | Persist patterns before moving on |
 | sl.ux | within active feature | return to current flow | UX applied, resume workflow |
 | sl.ux | standalone | done | One-off UX task |
+| sl.xray | database exists, schema needs review | `/sl.db audit` | Audit schema/RLS/indexes on the existing DB |
 | sl.xray | issues found | `/sl.audit` | Deep health check |
 | sl.xray | context mapped, ready to build | `/sl.new` | Start building with context |
 | sl.xray | standalone analysis | done | Analysis delivered |
+| sl.audit | database findings (schema/RLS/perf) | `/sl.db audit` | Deep-dive the DB layer at the SQL/DBA level |
 | sl.audit | critical issues found | `/sl.new` per issue | Create features to fix findings |
 | sl.audit | project healthy | done | No action needed |
