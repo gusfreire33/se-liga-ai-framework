@@ -28,3 +28,5 @@ docs/.vitepress/cache/
 
 # CI opcional (precisa de escopo workflow no token)
 .github/workflows/docs.yml
+
+.vercel
