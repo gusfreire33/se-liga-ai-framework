@@ -24,6 +24,24 @@ Depois siga com `/sl.new` para novas features — o método já conhece o terren
 ```
 O fluxo Padrão. `sl.new` fixa os requisitos antes de codar.
 
+## "Minha feature mexe no banco (schema novo, RLS, migration)"
+
+```text
+/sl.new → /sl.plan → /sl.db → /sl.build → /sl.review → /sl.done
+```
+O `/sl.db` entra **depois do plano e antes do build** — dispatcha o agente `data-engineer`
+para desenhar o schema físico, escrever a migration **com rollback** e as RLS policies, e só
+então você constrói contra o banco. Modos: `schema`, `migration`, `rls`, `optimize`, `audit`,
+`run-sql`. Em banco já existente e desconhecido, rode `/sl.db audit` (combina com `/sl.xray`).
+
+## "Tenho muitas tarefas independentes e quero rapidez"
+
+```text
+/sl.plan → /sl.dispatch → /sl.review → /sl.done
+```
+`sl.dispatch` decompõe o plano em waves paralelas (DAG), roteia cada tarefa pro modelo mais
+barato suficiente e roda em subagentes — bem mais rápido e barato que tudo em série.
+
 ## "Bug crítico em produção, agora"
 
 ```text

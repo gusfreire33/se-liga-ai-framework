@@ -12,7 +12,7 @@ Como comandos, skills, runtime e providers se conectam.
    │  COMANDOS  │ ───────────────▶   │    SKILLS     │
    │  /sl.plan  │   por relevância    │  sl-planning  │
    │  /sl.build │                     │  sl-ux-design │
-   │   …(17)    │                     │     …(32)     │
+   │   …(20)    │                     │     …(37)     │
    └─────┬──────┘                     └──────────────┘
          │ chama (determinístico)
          ▼
@@ -30,7 +30,9 @@ Como comandos, skills, runtime e providers se conectam.
 
 - **Comando → Skill:** cada comando declara/aciona as skills que precisa. `/sl.plan` puxa
   `sl-planning`, `sl-feature-specification`, `sl-id-convention`; `/sl.review` puxa
-  `sl-code-review`, `sl-security-audit`; e assim por diante.
+  `sl-code-review`, `sl-security-audit`; `/sl.db` puxa `sl-data-engineering` (e dispatcha o
+  agente `data-engineer`); `/sl.dispatch` puxa `sl-parallel-dispatch` + `sl-veto-conditions`;
+  `/sl.kaizen` puxa `sl-continuous-improvement` + `sl-health-score`.
 - **Comando → Runtime:** operações que precisam ser repetíveis (descobrir o próximo ID,
   ler o status da feature, montar o changelog, fazer o merge) são scripts em `.codesl/`.
 - **Skill → Skill:** skills se referenciam (ex.: `sl-frontend-architecture` aponta para
@@ -46,12 +48,21 @@ sl.init ──▶ sl.new ──▶ sl.plan ──▶ sl.build ──▶ sl.revie
  product                tasks.md    (subagentes)               + merge
 ```
 
+Quando a feature mexe no **banco**, o `/sl.db` entra entre `sl.plan` e `sl.build` (desenha
+schema/RLS/migrations antes de construir):
+
+```
+… ──▶ sl.plan ──▶ sl.db ──▶ sl.build ──▶ …
+                  SCHEMA.md   código
+                  migrations  (subagentes)
+```
+
 Cada caixa lê e escreve artefatos em `docs/features/<id>/`, registrando decisões e
 iterações em `.jsonl` — é isso que mantém o contexto entre sessões.
 
 ## Onde aprofundar
 
-- [Comandos](/reference/commands) — os 17 pontos de entrada
-- [Skills](/deep-dive/skills) — os 32 módulos de conhecimento
+- [Comandos](/reference/commands) — os 20 pontos de entrada
+- [Skills](/deep-dive/skills) — os 37 módulos de conhecimento
 - [Runtime & Estrutura](/deep-dive/project-structure) — o motor `.codesl/`
 - [Providers](/deep-dive/providers) — como cada CLI carrega tudo

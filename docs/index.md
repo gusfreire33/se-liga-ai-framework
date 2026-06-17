@@ -19,8 +19,8 @@ features:
     title: Workflow guiado
     details: Do onboarding ao merge — sl.init → sl.new → sl.plan → sl.build → sl.review → sl.done. O gateway /sl orienta o próximo passo.
   - icon: 🧠
-    title: 33 skills de domínio
-    details: Conhecimento empacotado (arquitetura, UX, segurança, testes, banco, data engineering) que carrega sozinho por relevância semântica.
+    title: 37 skills de domínio
+    details: Conhecimento empacotado (arquitetura, UX, segurança, testes, banco/data engineering, execução paralela, melhoria contínua) que carrega sozinho por relevância semântica.
   - icon: 🔌
     title: Multi-CLI de verdade
     details: O mesmo método roda em Claude Code, Codex, Grok Build e Antigravity. SKILL.md é padrão cross-agent.

@@ -1,6 +1,6 @@
 # Skills
 
-33 módulos de conhecimento de domínio. Skills **carregam sozinhas** por relevância
+37 módulos de conhecimento de domínio. Skills **carregam sozinhas** por relevância
 semântica (o campo `description` é o gatilho) e também são acionáveis diretamente.
 `SKILL.md` é um padrão **cross-agent** — o mesmo arquivo roda em todos os CLIs.
 
@@ -51,6 +51,8 @@ semântica (o campo `description` é o gatilho) e também são acionáveis diret
 | `sl-code-review` | Revisão: IoC, RESTful, contratos, OWASP, Clean Architecture, SOLID. |
 | `sl-security-audit` | Auditoria de segurança: OWASP Top 10, multi-tenancy, injeção, auth, XSS. |
 | `sl-health-check` | Saúde técnica: documentação, segurança, arquitetura, dados. |
+| `sl-health-score` | Scoring 0-100 reproduzível: dimensões ponderadas + penalidades por severidade (Solid/Emerging/Ad-hoc). Usada por `/sl.audit`, `/sl.xray`, `/sl.kaizen`. |
+| `sl-veto-conditions` | Gates de qualidade que **bloqueiam de verdade** (check + threshold + ação + severidade). Endurece `/sl.review`, `/sl.done`, `/sl.dispatch`. |
 | `sl-delivery-validation` | Validação de produto: requisitos 100% implementados, critérios de aceite. |
 
 ## Fluxo de trabalho & Ferramentas
@@ -58,6 +60,8 @@ semântica (o campo `description` é o gatilho) e também são acionáveis diret
 | Skill | Para que serve |
 |-------|----------------|
 | `sl-subagent-driven-development` | Execução de planos via subagentes despachados, com review entre tarefas. |
+| `sl-parallel-dispatch` | Motor de execução paralela: waves (DAG), roteamento de modelo (Worker/Haiku/Sonnet/Opus), CODE > LLM. Usada por `/sl.dispatch`. |
+| `sl-continuous-improvement` | Kaizen: extração de padrões (5 gates) + forgetting curve + recomendações defensáveis. Usada por `/sl.kaizen` e pelo agente `kaizen`. |
 | `sl-commit` | Commits inteligentes: Conventional Commits, detecção de tipo, staging. |
 | `sl-optimizing-git-workflow` | Config global de git (cores, performance, aliases) para máquinas novas. |
 | `sl-dev-environment-setup` | Detecta/instala bash, git, jq, gh quando faltam. |

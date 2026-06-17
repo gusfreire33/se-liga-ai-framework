@@ -1,6 +1,6 @@
 # Comandos
 
-18 comandos, agrupados por etapa do ciclo. Notação `/sl.x` (Claude/Codex); em Grok e
+20 comandos, agrupados por etapa do ciclo. Notação `/sl.x` (Claude/Codex); em Grok e
 Antigravity, cada comando é exposto como a skill `sl-x`.
 
 ## Gateway
@@ -29,12 +29,13 @@ Antigravity, cada comando é exposto como a skill `sl-x`.
 |---------|-----------|
 | **`/sl.build`** | Executa a implementação coordenando subagentes (Backend, Frontend, Database). Não faz commit sozinho. |
 | **`/sl.autopilot`** | Coordenador autônomo: roda planejamento → desenvolvimento → revisão sem interação. |
+| **`/sl.dispatch`** | Motor de execução paralela: decompõe o plano em tarefas atômicas, ordena em waves (DAG), roteia cada uma pro modelo mais barato suficiente (Worker/Haiku/Sonnet/Opus) e roda em subagentes com gates de veto. Turbina o `/sl.build` quando há muitas tarefas independentes. |
 
 ## Dados (Banco)
 
 | Comando | O que faz |
 |---------|-----------|
-| **`/sl.db`** | Engenharia de dados (PostgreSQL/Supabase): schema, migrations com rollback, RLS policies, otimização de query e operações. Dispatcha o agente **`data-engineer`**. Modos: `schema`, `migration`, `rls`, `optimize`, `audit`, `run-sql`, `setup`. |
+| **`/sl.db`** | Engenharia de dados (PostgreSQL/Supabase): schema, migrations com rollback, RLS policies, otimização de query e operações. Dispatcha o agente **`data-engineer`**. Modos: `schema`, `migration`, `rls`, `optimize`, `audit`, `run-sql`, `setup`. **No fluxo:** entra entre `/sl.plan` e `/sl.build` (desenhar schema/RLS antes de construir) e depois de `/sl.xray`/`/sl.audit` (modo `audit` do banco existente). |
 
 ## Qualidade
 
@@ -44,6 +45,12 @@ Antigravity, cada comando é exposto como a skill `sl-x`.
 | **`/sl.test`** | Geração automática de testes mirando ~80% de cobertura; detecta o framework e roda em paralelo por área. |
 | **`/sl.audit`** | Auditoria técnica completa: documentação, segurança, arquitetura, análise de dados. |
 | **`/sl.diagnose`** | Triagem investigativa pré-decisão para sintomas ambíguos; recomenda a rota (hotfix/feature/no-action). |
+
+## Melhoria contínua
+
+| Comando | O que faz |
+|---------|-----------|
+| **`/sl.kaizen`** | Sistema nervoso do projeto: `reflect` extrai aprendizados em padrões duráveis (5 gates + forgetting curve) e `report` gera recomendações defensáveis com evidência (máx 5). Sob demanda, sem hooks. |
 
 ## Entrega
 
