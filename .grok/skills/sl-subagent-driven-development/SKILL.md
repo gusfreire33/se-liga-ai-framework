@@ -303,3 +303,8 @@ Coordinator must confirm before reporting completion:
 - Append failure to Decision Log (status: `failed`, error excerpt)
 - Dispatch a fix subagent with full context — never patch manually (context pollution)
 - Re-run review after the fix
+## Related
+
+For many independent tasks, run them through `sl-parallel-dispatch` (via `/sl.dispatch`): DAG waves
+for parallelism, model routing (Worker/Haiku/Sonnet/Opus — CODE > LLM), and veto gates per wave.
+This skill stays the owner of the review loop between tasks.

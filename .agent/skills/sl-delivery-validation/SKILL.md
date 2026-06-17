@@ -235,3 +235,7 @@ Feature ready to merge.
 - [ ] Each requirement has implementation verified?
 - [ ] Gaps documented with required action?
 - [ ] Final status defined (APPROVED/BLOCKED)?
+## Related
+
+Express each requirement as a veto condition (`sl-veto-conditions`): a `check` that is objectively
+verifiable. No objective evidence that a requirement is implemented → `hard_block` (BLOCKED), not "looks done".

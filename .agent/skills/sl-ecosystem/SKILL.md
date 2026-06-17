@@ -22,9 +22,11 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl.build | Development Execution Specialist | sl-backend-development, sl-database-development, sl-frontend-development, sl-ux-design, sl-code-review, sl-ecosystem, sl-id-convention, sl-tasks-checklist |
 | sl.design | Mobile-first UX specification, coordinates subagents for complex features | sl-ux-design, sl-doc-schemas |
 | sl.diagnose | Pre-decision investigative triage for ambiguous symptoms. Applies 5-phase methodology (disambiguation, RCA, patterns, differential diagnosis, synthesis) and recommends route (hotfix/feature/extend/no-action). READ-ONLY | sl-investigation, sl-ecosystem |
+| sl.dispatch | Parallel execution engine: decompose a plan/feature into atomic tasks, order into DAG waves, route each to the cheapest sufficient model, run across subagents with veto gates | sl-parallel-dispatch, sl-veto-conditions, sl-subagent-driven-development, sl-ecosystem |
 | sl.done | Finalize feature, generate changelog. Validates epics + requirements. Detects branch protection and routes to PR or direct merge | sl-ecosystem, sl-id-convention |
 | sl.hotfix | Urgent fix with global ID ([NNNN]H). Creates isolated doc in docs/features/[NNNN]H-*, documents relationships in related.md. Escalates to sl-investigation when root cause not obvious | sl-ux-design, sl-ecosystem, sl-investigation, sl-id-convention |
 | sl.init | Project onboarding - 3 questions (name, level, language), flat owner.md, optional product.md | sl-product-discovery |
+| sl.kaizen | Continuous improvement: reflect learnings into durable patterns (5 gates + forgetting curve) and emit defensible, evidence-backed recommendations (max 5). On-demand, no hooks | sl-continuous-improvement, sl-health-score, sl-ecosystem |
 | sl.new | Feature discovery, creates about.md | sl-feature-discovery, sl-feature-specification, sl-doc-schemas, sl-ecosystem |
 | sl.plan | Technical Planning Orchestrator | sl-backend-development, sl-database-development, sl-frontend-development, sl-ux-design, sl-feature-discovery, sl-ecosystem, sl-id-convention, sl-tasks-checklist |
 | sl.pull-request | Create or update PR for current branch (idempotent). On feature branches, generates the permanent feature changelog before opening the PR | sl-commit, sl-doc-schemas, sl-id-convention |
@@ -43,8 +45,10 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl-claude-md-style | CLAUDE.md generation guide: content rules, format (JSON/markdown), line budget — load before any CLAUDE.md write |
 | sl-code-review | Code review: IoC, RESTful, Contracts, Security (OWASP), Clean Architecture, SOLID |
 | sl-commit | Knowledge reference for mid-workflow commits: adaptive message logic, type detection, staging rules |
+| sl-continuous-improvement | Kaizen: pattern extraction (5 gates), Ebbinghaus forgetting curve, defensible evidence-backed recommendations (max 5). Powers /sl.kaizen + kaizen agent |
 | sl-database-development | Data architecture: entities, repositories, migrations, naming — stack-agnostic |
 | sl-delivery-validation | Product validation: Requirements 100% implemented, prerequisites exist, acceptance criteria pass |
+| sl-health-score | Reproducible 0-100 scoring: explicit weighted dimensions + severity penalties + Solid/Emerging/Ad-hoc. Used by sl.audit, sl.xray, sl.health-check, /sl.kaizen |
 | sl-dev-environment-setup | Detect OS, diagnose missing tools, install WSL/git/jq/gh, configure VS Code |
 | sl-doc-schemas | Canonical schemas, stable IDs, universal doc rules, validation gate — single source of truth for all generated docs |
 | sl-ecosystem | Consolidated ecosystem view (source of truth) |
@@ -56,6 +60,7 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl-id-convention | Canonical [NNNN][L] ID and branch naming convention for features, hotfixes, refactors, chores, and docs — enforced by scripts (next-id.sh, get-branch-metadata.sh, done.sh) |
 | sl-investigation | Rigorous investigation methodology (5 phases with Iron Law) for vague symptoms and information-flow bugs. Adapted from systematic-debugging. Reusable by any command needing RCA before acting |
 | sl-optimizing-git-workflow | Git patterns, commits, branches, aliases |
+| sl-parallel-dispatch | Parallel execution engine: DAG waves (topological sort), model routing (Worker/Haiku/Sonnet/Opus), CODE > LLM. Powers /sl.dispatch |
 | sl-plan-based-features | Implement subscription plan-based features |
 | sl-planning | Technical planning orchestration |
 | sl-product-discovery | Product discovery (macro level) |
@@ -65,6 +70,7 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl-skill-creator | Create and test skills under real pressure |
 | sl-stripe | Stripe integration, price versioning, grandfathering |
 | sl-subagent-driven-development | Subagent coordination with quality gates |
+| sl-veto-conditions | Deterministic blocking quality gates (check + threshold + action + severity). Hardens sl.review, sl.done, sl-delivery-validation, sl.dispatch |
 | sl-tasks-checklist | tasks.md schema: 5 sections, tick rules, [!] semantics, "non-trivial change" rule, architect prompt template — single source of truth |
 | sl-token-efficiency | Compression, compact JSON, minimal tokens |
 | sl-ux-design | Components, mobile-first, SaaS patterns, shadcn, Tailwind |
@@ -78,6 +84,10 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | sl-database-development | sl.build, sl.autopilot, sl.plan, sl.review, sl.test |
 | sl-ux-design | sl.design, sl.ux, sl.build, sl.autopilot, sl.review, sl.hotfix, sl.plan |
 | sl-code-review | sl.review, sl.build |
+| sl-veto-conditions | sl.review, sl.done, sl.dispatch, sl-delivery-validation (gate enforcement) |
+| sl-parallel-dispatch | sl.dispatch, sl.build (parallel execution + model routing) |
+| sl-continuous-improvement | sl.kaizen (reflect + report) |
+| sl-health-score | sl.kaizen, sl.audit, sl.xray, sl-health-check (reproducible scoring) |
 | sl-security-audit | sl.audit, sl.review |
 | sl-feature-discovery | sl.new, sl.plan |
 | sl-feature-specification | sl.new |
@@ -100,7 +110,9 @@ description: Consolidated view of the sl-pro ecosystem - commands, skills, relat
 | Exploration | brainstorm → new → ... | Don't know where to start |
 | Triage | diagnose → (hotfix OR new OR no-action) | Vague symptom, unsure if bug/feature |
 | New Project | init → build → done | Create new project/feature |
-| Analysis | xray / audit | Check project health |
+| Parallel build | plan → dispatch → review → done | Many independent tasks, want parallelism + model routing |
+| Analysis | xray / audit / kaizen report | Check project health |
+| Improvement | kaizen reflect / kaizen report | Persist learnings; get evidence-backed recommendations |
 
 ## Command Next-Steps Routing
 
@@ -123,7 +135,10 @@ Conditions evaluated top-to-bottom — use FIRST match.
 | sl.new | user wants zero interaction | `/sl.autopilot` | Autonomous end-to-end |
 | sl.design | always | `/sl.plan` or `/sl.build` | UX spec done, plan or implement |
 | sl.plan | default | `/sl.build` | Most common path |
+| sl.plan | many independent tasks, want parallelism + cost routing | `/sl.dispatch` | Fan out plan across subagents in DAG waves |
 | sl.plan | user wants zero interaction | `/sl.autopilot` | Autonomous implementation |
+| sl.dispatch | waves executed | `/sl.review` | Code review before merge |
+| sl.dispatch | execution had escalations/surprises | `/sl.kaizen reflect` | Capture durable learnings |
 | sl.build | mode=DEVELOPMENT, wants tests | `/sl.test` | Validate with automated tests |
 | sl.build | mode=DEVELOPMENT, skip tests | `/sl.review` | Code review before merge |
 | sl.build | mode=CORRECTION | `/sl.review` | Re-validate after fixes |
@@ -141,6 +156,7 @@ Conditions evaluated top-to-bottom — use FIRST match.
 | sl.done | was feature, back on main | `/sl.new` | Start next feature |
 | sl.done | was epic, more subfeatures | `/sl.build feature N` | Next subfeature |
 | sl.done | was hotfix | `/sl.new` | Return to feature work |
+| sl.done | feature/epic had non-obvious learnings | `/sl.kaizen reflect` | Persist patterns before moving on |
 | sl.ux | within active feature | return to current flow | UX applied, resume workflow |
 | sl.ux | standalone | done | One-off UX task |
 | sl.xray | issues found | `/sl.audit` | Deep health check |

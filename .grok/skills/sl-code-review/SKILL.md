@@ -292,3 +292,8 @@ Generate the review report at `docs/features/${featureId}/review.md`. The exact 
 - Accept "works" as justification
 - Leave non-compiling code
 - Forget to verify `AppModule.imports[]` or barrel exports in `libs/`
+## Related
+
+Before declaring PASS, enforce the post-execution vetos from `sl-veto-conditions` over the diff
+(no `[TODO]`/`FIXME`/placeholders, no empty output files, acceptance criteria measurable). A gate
+the LLM can rationalize is not a gate — make each check objective.
