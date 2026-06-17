@@ -78,6 +78,25 @@ npx se-liga-ai init      # cria .codesl/ no projeto
 **Opções:** `--project` instala TUDO na pasta atual (sem global) · `--cli claude,codex`
 limita os CLIs. Ex.: `npx se-liga-ai install --project --cli claude`.
 
+### Atualizar (uma linha)
+
+Para puxar as **novidades do repositório** e atualizar a versão instalada na sua máquina:
+
+```bash
+npx se-liga-ai update
+```
+
+> Direto do GitHub (enquanto não publicado no npm):
+> ```bash
+> npx github:gusfreire33/se-liga-ai-framework update
+> ```
+
+O `update` **poda os arquivos antigos do framework** (skills `sl-*`, comandos `sl.*` e o
+runtime `.codesl/`) e recopia a versão nova — refletindo até renomeações e remoções. **Não
+toca** nas suas skills/agentes próprios (só mexe no que começa com `sl`). Aceita as mesmas
+flags do install (`--project`, `--cli`). Em projetos que já usam o sl, rode também
+`npx se-liga-ai init` para atualizar o `.codesl/` local.
+
 ### Alternativa: scripts shell (sem Node)
 
 ```powershell

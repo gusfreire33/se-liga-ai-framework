@@ -36,6 +36,29 @@ npx github:gusfreire33/se-liga-ai-framework init
 
 Isso cria `.codesl/` na raiz do projeto. Pronto — os comandos passam a encontrar os scripts.
 
+## Atualizar
+
+Para puxar as **novidades do repositório** e atualizar a versão instalada na sua máquina,
+**uma linha**:
+
+```bash
+npx github:gusfreire33/se-liga-ai-framework update
+```
+
+::: tip Forma curta
+Quando publicado no npm: `npx se-liga-ai update`.
+:::
+
+O `update` **poda os arquivos antigos do framework** (skills `sl-*`, comandos `sl.*` e o
+runtime `.codesl/`) e recopia a versão nova — refletindo até renomeações e remoções. Ele
+**não toca** nas suas skills e agentes próprios (só mexe no que começa com `sl`). Aceita as
+mesmas flags do install (`--project`, `--cli`).
+
+::: warning Runtime por projeto
+Num projeto que já usa o sl, rode também `npx github:gusfreire33/se-liga-ai-framework init`
+para atualizar o `.codesl/` local com os scripts novos.
+:::
+
 ## Opções
 
 ```bash
