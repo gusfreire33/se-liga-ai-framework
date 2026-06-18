@@ -1,7 +1,19 @@
 # Método "Se Liga AI" (`sl`)
 
-Clone rebrandeado do método **code-addiction v0.4.0** (prefixo original `add`),
-preparado para rodar em **4 CLIs**: Claude Code, Codex, Grok Build e Antigravity.
+Framework open-source de engenharia assistida por IA, preparado para rodar em **4 CLIs**:
+Claude Code, Codex, Grok Build e Antigravity.
+
+O `sl` nasceu da **fusão de dois projetos** que admiramos e dos quais herdamos o melhor:
+
+- **Add.pro** (base [code-addiction](https://github.com/code-addiction) v0.4.0) — a **agilidade
+  e a eficiência**: o fluxo enxuto discovery → plan → build → review, a instalação numa linha
+  via `npx`, a portabilidade cross-CLI (`SKILL.md`) e a economia de tokens em cada comando.
+- **AIOX Core** — a **organização e a orquestração**: dispatch paralelo com roteamento de
+  modelo (o mais barato que resolve), gates de veto determinísticos, melhoria contínua (kaizen)
+  e pontuação de saúde reproduzível.
+
+> _Dar a César o que é de César._ Este projeto não esconde de onde veio — ele credita as duas
+> bases e junta a velocidade de uma com a disciplina da outra. Veja [Origem & Créditos](#origem--créditos).
 
 Tudo que era `add` virou `sl`; o runtime `.codeadd/` virou `.codesl/`.
 
@@ -161,7 +173,38 @@ pelos scripts — é valor de domínio, não a marca.
 3. **Independente:** por usar `.codesl/` (não `.codeadd/`), coexiste com o code-addiction
    original num mesmo projeto sem colidir.
 
-## Origem (base v0.4.0)
+## Origem & Créditos
 
-`~/.claude/{skills,commands,agents}` · `~/.codeadd/{scripts,fragments,templates,manifest.json}`
-· formatos de CLI conforme docs oficiais de Codex, Grok Build e Antigravity (jun/2026).
+O `sl` é uma **fusão** — cada base trouxe uma força distinta, e o resultado é maior que a soma
+das partes. Damos a César o que é de César:
+
+### 🏎️ Add.pro / code-addiction v0.4.0 — agilidade & eficiência
+
+A espinha dorsal do método e o que o torna **rápido de usar**:
+
+- **Fluxo enxuto:** discovery → plan → build → review → done, sem cerimônia.
+- **Instalação numa linha** (`npx se-liga-ai install`) e onboarding instantâneo por projeto.
+- **Portabilidade cross-CLI:** a mesma `SKILL.md` roda em Claude, Codex, Grok e Antigravity.
+- **Densidade de token:** comandos e skills compactos, sem desperdício de contexto.
+
+> Base: `~/.claude/{skills,commands,agents}` · `~/.codeadd/{scripts,fragments,templates,manifest.json}`,
+> com formatos de CLI conforme docs oficiais de Codex, Grok Build e Antigravity (jun/2026).
+
+### 🧭 AIOX Core — organização & orquestração
+
+A camada de **engenharia disciplinada** portada para o `sl` (commit `feat(sl): port engenharia do AIOX`):
+
+- **`sl-parallel-dispatch`** — decompõe um plano em tarefas atômicas, ordena em ondas via DAG e
+  **roteia cada uma ao modelo mais barato que resolve** (Worker/Haiku/Sonnet/Opus), com o princípio
+  **CODE > LLM**.
+- **`sl-veto-conditions`** — transforma checklists narrativos em gates **determinísticos** que
+  *bloqueiam* (check + threshold + ação + severidade), sem a IA racionalizar um "passou".
+- **`sl-continuous-improvement` / `sl.kaizen`** — captura aprendizados com **5 portões de qualidade**
+  e uma **curva de esquecimento de Ebbinghaus**: o que é reusado sobrevive, o que é ignorado decai.
+- **`sl-health-score`** — pontuação **reproduzível** (dimensões ponderadas + penalidades) — mesmo
+  código + mesma fórmula = mesma nota, sempre.
+
+### Como usar os créditos
+
+Este é um projeto open-source: se você o estende ou redistribui, **mantenha a atribução às duas
+bases**. Foi a união da velocidade do Add.pro com a disciplina do AIOX Core que deu forma ao `sl`.
